@@ -48,8 +48,8 @@ function createPromise(position, delay) {
 }
 
 function onSuccess({ position, delay }) {
-  iziToast.error({
-    title: 'Error',
+  iziToast.success({
+    title: 'OK',
     message: `Fulfilled promise ${position} in ${delay}ms`,
     layout: 2,
     position: 'topRight',
@@ -59,8 +59,8 @@ function onSuccess({ position, delay }) {
 }
 
 function onError({ position, delay }) {
-  iziToast.success({
-    title: 'OK',
+  iziToast.error({
+    title: 'Error',
     message: `Rejected promise ${position} in ${delay}ms`,
     layout: 2,
     position: 'topRight',
