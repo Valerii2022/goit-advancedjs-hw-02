@@ -12,6 +12,7 @@ const refs = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
+refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', handleStartBtnClick);
 
 let timer;
@@ -28,7 +29,6 @@ const options = {
 };
 
 flatpickr(refs.input, options);
-refs.startBtn.disabled = true;
 
 function convertMs(ms) {
   const second = 1000;
@@ -60,7 +60,6 @@ function handleSelectedDate(selected) {
   }
   refs.startBtn.disabled = false;
   timer = selected - currentDate;
-  setCurrentTimer(timer);
 }
 
 function handleStartBtnClick() {
