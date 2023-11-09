@@ -5,9 +5,6 @@ const refs = { form: document.querySelector('.form') };
 
 refs.form.addEventListener('submit', handleFormSubmit);
 
-let timerId = null;
-let position = 0;
-
 function handleFormSubmit(e) {
   e.preventDefault();
   const formData = new FormData(e.currentTarget);
@@ -19,31 +16,24 @@ function handleFormSubmit(e) {
   const amount = Number(data.amount);
   const step = Number(data.step);
 
-  setTimeout(() => {
-    position += 1;
-    createPromise(position, delay).then(onSuccess).catch(onError);
+  createPromise(1, delay).then(onSuccess).catch(onError);
 
-    timerId = setInterval(() => {
-      position += 1;
-      delay += step;
-      createPromise(position, delay).then(onSuccess).catch(onError);
-
-      if (position === amount) {
-        clearInterval(timerId);
-        position = 0;
-      }
-    }, step);
-  }, delay);
+  for (let i = 2; i <= amount; i += 1) {
+    delay += step;
+    createPromise(i, delay).then(onSuccess).catch(onError);
+  }
 }
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
     const shouldResolve = Math.random() > 0.5;
-    if (shouldResolve) {
-      resolve({ position, delay });
-    } else {
-      reject({ position, delay });
-    }
+    setTimeout(() => {
+      if (shouldResolve) {
+        resolve({ position, delay });
+      } else {
+        reject({ position, delay });
+      }
+    }, delay);
   });
 }
 

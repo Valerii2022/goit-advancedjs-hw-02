@@ -63,10 +63,12 @@ function handleSelectedDate(selectedDate) {
 
 function handleStartBtnClick() {
   const timerId = setInterval(() => {
+    refs.input.disabled = true;
     refs.startBtn.disabled = true;
     timer -= 1000;
     if (timer <= 1000) {
       clearInterval(timerId);
+      refs.input.disabled = false;
       iziToast.success({
         title: 'OK',
         message: 'The timer has successfully finished!',
