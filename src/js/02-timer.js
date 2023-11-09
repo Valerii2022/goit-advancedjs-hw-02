@@ -12,7 +12,6 @@ const refs = {
   seconds: document.querySelector('[data-seconds]'),
 };
 
-refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', handleStartBtnClick);
 
 let timer;
@@ -46,8 +45,8 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-function handleSelectedDate(selected) {
-  if (currentDate >= selected) {
+function handleSelectedDate(selectedDate) {
+  if (currentDate >= selectedDate) {
     iziToast.error({
       title: 'Error',
       message: 'Please choose a date in the future',
@@ -59,15 +58,15 @@ function handleSelectedDate(selected) {
     return;
   }
   refs.startBtn.disabled = false;
-  timer = selected - currentDate;
+  timer = selectedDate - currentDate;
 }
 
 function handleStartBtnClick() {
-  const id = setInterval(() => {
+  const timerId = setInterval(() => {
     refs.startBtn.disabled = true;
     timer -= 1000;
     if (timer <= 1000) {
-      clearInterval(id);
+      clearInterval(timerId);
       iziToast.success({
         title: 'OK',
         message: 'The timer has successfully finished!',

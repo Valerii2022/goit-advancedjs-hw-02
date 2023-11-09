@@ -38,7 +38,7 @@ function handleFormSubmit(e) {
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
-    const shouldResolve = Math.random() > 0.3;
+    const shouldResolve = Math.random() > 0.5;
     if (shouldResolve) {
       resolve({ position, delay });
     } else {
