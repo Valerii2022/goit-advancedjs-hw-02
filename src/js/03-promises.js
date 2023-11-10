@@ -1,7 +1,10 @@
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-const refs = { form: document.querySelector('.form') };
+const refs = {
+  form: document.querySelector('.form'),
+  submitBtn: document.querySelector('[data-submit]'),
+};
 
 refs.form.addEventListener('submit', handleFormSubmit);
 
@@ -15,6 +18,8 @@ function handleFormSubmit(e) {
   let delay = Number(data.delay);
   const amount = Number(data.amount);
   const step = Number(data.step);
+
+  refs.form.reset();
 
   createPromise(1, delay).then(onSuccess).catch(onError);
 
